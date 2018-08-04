@@ -9,11 +9,11 @@ export const CHANGE_GENDER: 'CHANGE_GENDER' = 'CHANGE_GENDER';
 /**
  * Action
  */
-export const change_name = (value: string) => ({
+export const change_name = (value: string): Action & { payload: any } => ({
   type: CHANGE_NAME,
   payload: value
 });
-export const change_gender = (value: string) => ({
+export const change_gender = (value: string): Action & { payload: any } => ({
   type: CHANGE_GENDER,
   payload: value
 });
