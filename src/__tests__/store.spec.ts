@@ -1,10 +1,16 @@
 import { createStore, combineReducers, Store } from 'redux';
 import userReducer, {
-  change_name,
+// type
   User,
-  CHANGE_NAME
+
+  //action
+  change_name,
+  change_gender,
+
+  // contants
+  CHANGE_NAME,
+  CHANGE_GENDER
 } from '../store/reducers/user';
-import { StoreState } from '../store/index.d';
 
 describe('Store', () => {
   let store: Store;
@@ -19,17 +25,26 @@ describe('Store', () => {
   afterEach(() => {
     jest.resetModules();
   });
+
+  const findState = (key: string) => store.getState()[key];
+  const findUserStateFromKey = (key: 'name' | 'gender') =>
+    store.getState().user[key];
+
   it('預設 state', () => {
     const defaultState: User = {
       name: '',
       gender: ''
     };
-    const state: StoreState = store.getState();
-    expect(state.user).toEqual(defaultState);
+
+    expect(findState('user')).toEqual(defaultState);
   });
-  it('預設名稱 `Whien`', () => {
-    const state: StoreState = store.getState();
-    expect(state.user.name).toEqual('');
+
+  it('預設名稱 ``', () => {
+    expect(findUserStateFromKey('name')).toEqual('');
+  });
+
+  it('預設性別 ``', () => {
+    expect(findUserStateFromKey('gender')).toEqual('');
   });
 
   it('改變名稱 `YoYoMan`', () => {
@@ -38,7 +53,15 @@ describe('Store', () => {
       payload: 'YoYoMan'
     });
     store.dispatch(change_name('YoYoMan'));
-    const state: StoreState = store.getState();
-    expect(state.user.name).toEqual('YoYoMan');
+    expect(findUserStateFromKey('name')).toEqual('YoYoMan');
+  });
+
+  it('改變性別 `girl`', () => {
+    store.dispatch({
+      type: CHANGE_GENDER,
+      payload: 'girl'
+    });
+    store.dispatch(change_gender('girl'));
+    expect(findUserStateFromKey('gender')).toEqual('girl');
   });
 });

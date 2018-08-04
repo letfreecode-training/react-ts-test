@@ -1,12 +1,20 @@
 import { Action } from 'redux';
 
+/**
+ * contants
+ */
 export const CHANGE_NAME: 'CHANGE_NAME' = 'CHANGE_NAME';
+export const CHANGE_GENDER: 'CHANGE_GENDER' = 'CHANGE_GENDER';
 
 /**
  * Action
  */
 export const change_name = (value: string) => ({
   type: CHANGE_NAME,
+  payload: value
+});
+export const change_gender = (value: string) => ({
+  type: CHANGE_GENDER,
   payload: value
 });
 
@@ -35,6 +43,8 @@ const userReducer = (
   switch (action.type) {
     case CHANGE_NAME:
       return change_state(state, 'name', action.payload);
+    case CHANGE_GENDER:
+      return change_state(state, 'gender', action.payload);
     default:
       return state;
   }
