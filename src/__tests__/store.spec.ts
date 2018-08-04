@@ -4,10 +4,7 @@ import userReducer, {
   User,
   CHANGE_NAME
 } from '../store/reducers/user';
-
-type State = {
-  user: User;
-};
+import { StoreState } from '../store/index.d';
 
 describe('Store', () => {
   let store: Store;
@@ -27,11 +24,11 @@ describe('Store', () => {
       name: '',
       gender: ''
     };
-    const state: State = store.getState();
+    const state: StoreState = store.getState();
     expect(state.user).toEqual(defaultState);
   });
   it('預設名稱 `Whien`', () => {
-    const state: State = store.getState();
+    const state: StoreState = store.getState();
     expect(state.user.name).toEqual('');
   });
 
@@ -41,7 +38,7 @@ describe('Store', () => {
       payload: 'YoYoMan'
     });
     store.dispatch(change_name('YoYoMan'));
-    const state: State = store.getState();
+    const state: StoreState = store.getState();
     expect(state.user.name).toEqual('YoYoMan');
   });
 });
