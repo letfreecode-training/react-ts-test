@@ -18,6 +18,9 @@ export const change_gender = (value: string) => ({
   payload: value
 });
 
+/**
+ * Type
+ */
 export type User = {
   name: string;
   gender: string;
@@ -26,16 +29,25 @@ type ActionPayload = {
   payload: any;
 };
 
+/**
+ * Initial State
+ */
 const inititalState: User = {
   name: '',
   gender: ''
 };
 
+/**
+ * Helper
+ */
 const change_state = (state: User, key: string, value: string) =>
   Object.assign({}, state, {
     [key]: value
   });
 
+/**
+ * Reducer core
+ */
 const userReducer = (
   state: User = inititalState,
   action: Action & ActionPayload
@@ -49,4 +61,5 @@ const userReducer = (
       return state;
   }
 };
+
 export default userReducer;
