@@ -23,7 +23,7 @@ export const change_gender = (value: string): Action & { payload: any } => ({
  */
 export type User = {
   name: string;
-  gender: string;
+  gender: '男' | '女';
 };
 type ActionPayload = {
   payload: any;

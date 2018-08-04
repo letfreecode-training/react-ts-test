@@ -9,7 +9,8 @@ type Props = {
   change_name(value: string): void;
   change_gender(value: string): void;
 };
-const chooseBoyOrGirl = (gender: string) => (gender === '男' ? '女' : '男');
+const chooseBoyOrGirl = (gender: '男' | '女'): string =>
+  gender === '男' ? '女' : '男';
 export const Hello: React.StatelessComponent<Props> = props => (
   <div>
     <div>
