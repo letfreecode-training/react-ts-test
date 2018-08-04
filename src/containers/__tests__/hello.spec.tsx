@@ -1,9 +1,10 @@
 import * as React from 'react';
+import { render } from 'react-dom';
 
 /**
  * Enzyme core
  */
-import Enzyme, { mount } from 'enzyme';
+import Enzyme, { mount, ReactWrapper } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 /**
@@ -47,17 +48,25 @@ const store: Store = createStore(
 );
 
 describe('<Hello />', () => {
+  let tree: ReactWrapper;
+
+  beforeEach(() => {
+    tree = mount(
+      <Provider store={store}>
+        <Hello />
+      </Provider>
+    );
+  });
+  afterEach(() => {
+    tree = null;
+  });
+
   it('預設性別 `男`', () => {
     const state: StoreState = store.getState();
     expect(state.user.gender).toEqual('男');
   });
   it('按鈕改變性別', () => {
     let state: StoreState;
-    const tree = mount(
-      <Provider store={store}>
-        <Hello />
-      </Provider>
-    );
     /**
      * 第一次點擊，將預設 `男` 改為 `女`
      */
@@ -71,5 +80,10 @@ describe('<Hello />', () => {
     tree.find('button').simulate('click');
     state = store.getState();
     expect(state.user.gender).toEqual('男');
+  });
+  it('輸入改變名字', () => {
+    tree.find('input').simulate('change', { target: { value: 'Whien' } });
+    const state: StoreState = store.getState();
+    expect(state.user.name).toEqual('Whien');
   });
 });
