@@ -34,7 +34,7 @@ type ActionPayload = {
  */
 const inititalState: User = {
   name: '',
-  gender: ''
+  gender: '男'
 };
 
 /**

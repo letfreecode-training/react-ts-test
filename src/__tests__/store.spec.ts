@@ -33,7 +33,7 @@ describe('Store', () => {
   it('預設 state', () => {
     const defaultState: User = {
       name: '',
-      gender: ''
+      gender: '男'
     };
 
     expect(findState('user')).toEqual(defaultState);
@@ -44,7 +44,7 @@ describe('Store', () => {
   });
 
   it('預設性別 ``', () => {
-    expect(findUserStateFromKey('gender')).toEqual('');
+    expect(findUserStateFromKey('gender')).toEqual('男');
   });
 
   it('改變名稱 `YoYoMan`', () => {
