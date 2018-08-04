@@ -1,16 +1,34 @@
 import * as React from 'react';
-import { prependOnceListener } from 'cluster';
+import { connect } from 'react-redux';
+import { StoreState } from '../store/index.d';
+import { User } from '../store/reducers/user';
+import { change_name } from '../store/reducers/user';
 
 type Props = {
-  name: string;
+  user: User;
+  change_name: (value: string) => void;
 };
-const Hello: React.StatelessComponent<Props> = props => (
+export const Hello: React.StatelessComponent<Props> = props => (
   <div>
     <div>
-      <input type="text" />
+      <input
+        onChange={e => props.change_name(e.target.value)}
+        type="text"
+        value={props.user.name}
+      />
     </div>
-    <div>Hello, {props.name}</div>
+    <div>Hello, {props.user.name}</div>
   </div>
 );
 
-export default Hello;
+const mapStateToProps = (state: StoreState) => ({
+  user: state.user
+});
+const mapDispatchToProps = {
+  change_name
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Hello);
